@@ -1,11 +1,11 @@
 #' Calculates coverage based upon the CDF
 #'
-#' @param cdes: A matrix of conditional density estimates; each row
+#' @param cdes A matrix of conditional density estimates; each row
 #'   corresponds to an observation, each column corresponds to a grid
 #'   point
-#' @param z_grid: A vector/matrix of grid points at which the CDE is
+#' @param z_grid A vector/matrix of grid points at which the CDE is
 #'   estimated
-#' @param z_test: The true responses associated with the observations
+#' @param z_test The true responses associated with the observations
 #' @return A vector of "p-values"
 #' @examples
 #'   set.seed(12345)

@@ -7,14 +7,14 @@
 cdf_coverage(cdes, z_grid, z_test)
 }
 \arguments{
-\item{cdes:}{A matrix of conditional density estimates; each row
+\item{cdes}{A matrix of conditional density estimates; each row
 corresponds to an observation, each column corresponds to a grid
 point}
 
-\item{z_grid:}{A vector/matrix of grid points at which the CDE is
+\item{z_grid}{A vector/matrix of grid points at which the CDE is
 estimated}
 
-\item{z_test:}{The true responses associated with the observations}
+\item{z_test}{The true responses associated with the observations}
 }
 \value{
 A vector of "p-values"
