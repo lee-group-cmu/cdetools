@@ -2,4 +2,5 @@
 
 export(cde_loss)
 export(cdf_coverage)
+export(hpd_contour_levels)
 export(hpd_coverage)
