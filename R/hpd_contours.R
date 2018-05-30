@@ -1,3 +1,13 @@
+#' Calculate contour levels for HPD sets
+#'
+#' @param density A vector of density evaluations.
+#' @param z_grid The grid on which the density is evaluated. Should be
+#'   regularly spaced.
+#' @param probs The probability levels for the HPD sets
+#' @param max_iters Optional; number of iterations of binary search
+#' @param tol Optional; tolerance of binary search
+#'
+#' @export
 hpd_contour_levels <- function(density, z_grid, probs, max_iters = 200, tol = 1e-3) {
   z_min <- apply(z_grid, 2, min)
   z_max <- apply(z_grid, 2, max)
