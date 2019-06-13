@@ -1,4 +1,4 @@
-#' Calculates coverage based upon the CDF
+#' Calculates coverage based upon the CDF (i.e., compute PIT values)
 #'
 #' @param cdes A matrix of conditional density estimates; each row
 #'   corresponds to an observation, each column corresponds to a grid
@@ -14,10 +14,10 @@
 #'   z_grid <- seq(-5, 5, length.out = n_grid)
 #'   z_test <- rnorm(n_test)
 #'   cdes <- matrix(dnorm(z_grid), nrow = n_test, ncol = n_grid, byrow = TRUE)
-#'   pvals <- cdf_coverage(cdes, z_grid, z_test)
+#'   pvals <- pit_coverage(cdes, z_grid, z_test)
 #'   ks.test(pvals, "punif")
 #' @export
-cdf_coverage <- function(cdes, z_grid, z_test) {
+pit_coverage <- function(cdes, z_grid, z_test) {
   stopifnot(nrow(cdes) == length(z_test))
   stopifnot(ncol(cdes) == length(z_grid))
   z_min <- min(z_grid)
