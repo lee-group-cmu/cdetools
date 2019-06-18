@@ -4,12 +4,12 @@ Version: 0.1
 Authors@R: person("Taylor", "Pospisil", email = "tpospisi@andrew.cmu.edu", role = c("aut", "cre"))
 Description: Provides tools for evaluating conditional density
   estimates. Calculates CDE loss, coverge, and HPD coverage.
-URL: https://github.com/tpospisi/cdetools
+URL: https://github.com/tpospisi/cdetools/r
 BugReports: https://github.com/tpospisi/cdetools/issues
 Depends: R (>= 3.3.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1.9000
 Suggests: testthat
 Imports: FNN
