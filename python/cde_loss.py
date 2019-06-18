@@ -3,7 +3,8 @@ from scipy.spatial import KDTree
 
 
 def cde_loss(cde_estimates, z_grid, z_test):
-    """Calculates conditional density estimation loss on holdout data
+    """
+    Calculates conditional density estimation loss on holdout data
 
     @param cde_estimates: a numpy array where each row is a density
     estimate on z_grid

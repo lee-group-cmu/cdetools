@@ -1,9 +1,20 @@
 import numpy as np
 from scipy.spatial import KDTree
-import scipy.stats as stats
 
 
 def hpd_coverage(cdes, z_grid, z_test):
+    """
+    Calculate coverage based upon HPD regions.
+
+    @param cdes: a numpy array of conditional density estimates;
+        each row corresponds to an observation, each column corresponds to a grid
+        point
+    @param z_grid: a numpy array of the grid points at which cde_estimates is evaluated
+    @param z_test: a numpy array of the true z values corresponding to the rows of cde_estimates
+
+    @returns A numpy array of "p-values"; under the true generating model
+       these are Uniform(0, 1)
+    """
 
     if len(z_test.shape) == 1:
         z_test = z_test.reshape(-1, 1)
@@ -36,28 +47,3 @@ def hpd_coverage(cdes, z_grid, z_test):
         pvals[ii] = z_delta * np.sum(cdes[ii, np.where(cdes[ii, :] > cdes[ii, nn_id])])
 
     return pvals
-
-
-### TEST
-#   np.random.seed(12345)
-#   n_grid = 1001
-#   n_test = 73
-#   z_grid = np.linspace(-5,5,n_grid)
-#   z_test = np.random.normal(0,1,(n_test,))
-#   dist = stats.norm()
-#   cdes = np.array([dist.pdf(z_grid) for _ in range(n_test)]).reshape(n_test, n_grid)
-#   pvals = hpd_coverage(cdes, z_grid, z_test)
-#   stats.kstest(pvals, 'uniform')
-
-#n_grid = 51
-#n_test = 701
-#xx_grid, yy_grid = np.meshgrid(np.linspace(0, 1, n_grid), np.linspace(0, 1, n_grid))
-#z_grid = np.hstack((xx_grid.reshape(-1, 1), yy_grid.reshape(-1,1)))
-#z_test = np.hstack((np.random.beta(a=2, b=3, size=(n_test, 1)),
-#                    np.random.beta(a=4, b=1, size=(n_test, 1))))
-#dist_beta1 = stats.beta(2, 3)
-#dist_beta2 = stats.beta(4, 1)
-#cde = dist_beta1.pdf(z_grid[:, 0]) * dist_beta2.pdf(z_grid[:, 1])
-#cdes = np.tile(cde, (n_test, 1))
-#pvals = hpd_coverage(cdes, z_grid, z_test)
-#stats.kstest(pvals, 'uniform')
