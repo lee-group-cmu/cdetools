@@ -1,5 +1,6 @@
 import numpy as np
-import scipy.stats as stats
+from scipy.spatial import KDTree
+
 
 def cde_loss(cde_estimates, z_grid, z_test):
     """Calculates conditional density estimation loss on holdout data
@@ -13,24 +14,39 @@ def cde_loss(cde_estimates, z_grid, z_test):
     the holdout data and the SE error
     """
 
+    if len(z_test.shape) == 1:
+        z_test = z_test.reshape(-1, 1)
+    if len(z_grid.shape) == 1:
+        z_grid = z_grid.reshape(-1, 1)
+
     n_obs, n_grid = cde_estimates.shape
+    n_samples, feats_samples = z_test.shape
+    n_grid_points, feats_grid = z_grid.shape
 
-    term1 = np.trapz(cde_estimates ** 2, z_grid.flatten())
+    if n_obs != n_samples:
+        raise ValueError("Number of samples in CDEs should be the same as in z_test."
+                         "Currently %s and %s." % (n_obs, n_samples))
+    if n_grid != n_grid_points:
+        raise ValueError("Number of grid points in CDEs should be the same as in z_grid."
+                         "Currently %s and %s." % (n_grid, n_grid_points))
 
-    nns = [np.argmin(np.abs(z_grid - z_test[ii])) for ii in range(n_obs)]
-    term2 = cde_estimates[range(n_obs), nns]
+    if feats_samples != feats_grid:
+        raise ValueError("Dimensionality of test points and grid points need to coincise."
+                         "Currently %s and %s." % (feats_samples, feats_grid))
 
-    loss = np.mean(term1 - 2 * term2)
-    se_error = np.std(term1 - 2 * term2, axis=0) / (n_obs**0.5)
+    z_min = np.min(z_grid, axis=0)
+    z_max = np.max(z_grid, axis=0)
+    z_delta = np.prod(z_max - z_min) / n_grid_points
+
+    integrals = z_delta * np.sum(cde_estimates**2, axis=1)
+
+    kdtree = KDTree(z_grid)
+    nn_ids = np.array(
+        [kdtree.query(z_test[ii, :])[1] for ii in range(n_samples)]).reshape(-1,)
+    likeli = cde_estimates[(tuple(np.arange(n_samples)), tuple(nn_ids))]
+
+    losses = integrals - 2 * likeli
+    loss = np.mean(losses)
+    se_error = np.std(losses, axis=0) / (n_obs ** 0.5)
 
     return loss, se_error
-
-
-
-### TEST
-#' z_grid = np.linspace(0, 1, 99)
-#' dist_unif = stats.uniform()
-#' z_test = dist_unif.rvs(101)
-#   dist = stats.beta(2,2)
-#   cdes = np.array([dist.pdf(z_grid) for _ in range(101)]).reshape(101, 99)
-#' cde_loss(cde, z_grid, z_test)

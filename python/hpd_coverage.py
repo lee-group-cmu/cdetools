@@ -48,3 +48,16 @@ def hpd_coverage(cdes, z_grid, z_test):
 #   cdes = np.array([dist.pdf(z_grid) for _ in range(n_test)]).reshape(n_test, n_grid)
 #   pvals = hpd_coverage(cdes, z_grid, z_test)
 #   stats.kstest(pvals, 'uniform')
+
+#n_grid = 51
+#n_test = 701
+#xx_grid, yy_grid = np.meshgrid(np.linspace(0, 1, n_grid), np.linspace(0, 1, n_grid))
+#z_grid = np.hstack((xx_grid.reshape(-1, 1), yy_grid.reshape(-1,1)))
+#z_test = np.hstack((np.random.beta(a=2, b=3, size=(n_test, 1)),
+#                    np.random.beta(a=4, b=1, size=(n_test, 1))))
+#dist_beta1 = stats.beta(2, 3)
+#dist_beta2 = stats.beta(4, 1)
+#cde = dist_beta1.pdf(z_grid[:, 0]) * dist_beta2.pdf(z_grid[:, 1])
+#cdes = np.tile(cde, (n_test, 1))
+#pvals = hpd_coverage(cdes, z_grid, z_test)
+#stats.kstest(pvals, 'uniform')
