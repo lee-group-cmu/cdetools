@@ -8,7 +8,8 @@
 #' @param tol Optional; tolerance of binary search
 #'
 #' @export
-hpd_contour_levels <- function(density, z_grid, probs, max_iters = 200, tol = 1e-3) {
+hpd_contour_levels <- function(density, z_grid, probs,
+                               max_iters = 200, tol = 1e-3) {
   z_min <- apply(z_grid, 2, min)
   z_max <- apply(z_grid, 2, max)
 
@@ -26,7 +27,7 @@ hpd_contour_levels <- function(density, z_grid, probs, max_iters = 200, tol = 1e
 
       if (abs(area - prob) < tol) {
         return(mid)
-      } else if(area < prob) {
+      } else if (area < prob) {
         upper <- mid
       } else {
         lower <- mid
