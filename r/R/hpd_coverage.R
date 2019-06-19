@@ -38,7 +38,7 @@ hpd_coverage <- function(cdes, z_grid, z_test) {
   n_test <- nrow(cdes)
   pvals <- rep(NA, n_test)
   for (ii in seq_len(n_test)) {
-    nn_id <- FNN::knnx.index(z_grid, z_test[ii, , drop = FALSE], k = 1)
+    nn_id <- FNN::knnx.index(z_grid, z_test[ii,, drop = FALSE], k = 1)
     cutoff <- cdes[ii, nn_id]
     pvals[ii] <- z_delta * sum(cdes[ii, cdes[ii, ] >= cutoff])
   }
