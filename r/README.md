@@ -9,5 +9,5 @@ Installation
 Use the =devtools= package to install from Github
 
 ```{r}
-devtools::install_github("tpospisi/cdetools")
+devtools::install_github("tpospisi/cdetools/r")
 ```
