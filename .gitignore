@@ -1,2 +1,4 @@
 .idea/*
 r/.Rhistory
+python/__pycache__/*
+python/tests/__pycache__/*
