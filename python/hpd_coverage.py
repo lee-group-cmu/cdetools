@@ -12,7 +12,7 @@ def hpd_coverage(cdes, z_grid, z_test):
     @param z_grid: a numpy array of the grid points at which cde_estimates is evaluated
     @param z_test: a numpy array of the true z values corresponding to the rows of cde_estimates
 
-    @returns A numpy array of "p-values"; under the true generating model
+    @returns A numpy array of values; under the true generating model
        these are Uniform(0, 1)
     """
 
