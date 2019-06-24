@@ -17,7 +17,7 @@ estimated}
 \item{z_test}{The true responses associated with the observations}
 }
 \value{
-A vector of "p-values"
+A vector of values
 }
 \description{
 Calculates coverage based upon the CDF
@@ -29,6 +29,6 @@ Calculates coverage based upon the CDF
   z_grid <- seq(-5, 5, length.out = n_grid)
   z_test <- rnorm(n_test)
   cdes <- matrix(dnorm(z_grid), nrow = n_test, ncol = n_grid, byrow = TRUE)
-  pvals <- cdf_coverage(cdes, z_grid, z_test)
-  ks.test(pvals, "punif")
+  vals <- cdf_coverage(cdes, z_grid, z_test)
+  ks.test(vals, "punif")
 }

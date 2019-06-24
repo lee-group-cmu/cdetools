@@ -17,7 +17,7 @@ estimated}
 \item{z_test}{The true responses associated with the observations}
 }
 \value{
-A vector of "p-values"; under the true generating model
+A vector of values; under the true generating model
   these are Uniform(0, 1)
 }
 \description{
@@ -30,6 +30,6 @@ Calculate coverage based upon HPD regions.
   z_grid <- seq(-5, 5, length.out = n_grid)
   z_test <- rnorm(n_test)
   cdes <- matrix(dnorm(z_grid), nrow = n_test, ncol = n_grid, byrow = TRUE)
-  pvals <- hpd_coverage(cdes, z_grid, z_test)
-  ks.test(pvals, "punif")
+  vals <- hpd_coverage(cdes, z_grid, z_test)
+  ks.test(vals, "punif")
 }
