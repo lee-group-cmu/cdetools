@@ -13,7 +13,7 @@ def test__true_density_has_uniform_coverage():
         z_test = np.random.normal(0,1,(n_test,))
         dist = stats.norm()
         cdes = np.array([dist.pdf(z_grid) for _ in range(n_test)]).reshape(n_test, n_grid)
-        pvals = cdf_coverage(cdes, z_grid, z_test)
-        n_fail += 0 if stats.kstest(pvals, 'uniform')[1] > 0.01 else 1
+        vals = cdf_coverage(cdes, z_grid, z_test)
+        n_fail += 0 if stats.kstest(vals, 'uniform')[1] > 0.01 else 1
 
     assert n_fail <= 1

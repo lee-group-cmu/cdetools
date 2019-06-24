@@ -13,8 +13,8 @@ def test__true_density_uniform_HPD_coverage():
         z_test = np.random.normal(0,1,(n_test,))
         dist = stats.norm()
         cdes = np.array([dist.pdf(z_grid) for _ in range(n_test)]).reshape(n_test, n_grid)
-        pvals = hpd_coverage(cdes, z_grid, z_test)
-        n_fail += 0 if stats.kstest(pvals, 'uniform')[1] > 0.01 else 1
+        vals = hpd_coverage(cdes, z_grid, z_test)
+        n_fail += 0 if stats.kstest(vals, 'uniform')[1] > 0.01 else 1
 
     assert n_fail <= 1
 
@@ -33,7 +33,7 @@ def test__true_mult_density_uniform_HPD_coverage():
         dist_beta2 = stats.beta(4, 1)
         cde = dist_beta1.pdf(z_grid[:, 0]) * dist_beta2.pdf(z_grid[:, 1])
         cdes = np.tile(cde, (n_test, 1))
-        pvals = hpd_coverage(cdes, z_grid, z_test)
-        n_fail += 0 if stats.kstest(pvals, 'uniform')[1] > 0.01 else 1
+        vals = hpd_coverage(cdes, z_grid, z_test)
+        n_fail += 0 if stats.kstest(vals, 'uniform')[1] > 0.01 else 1
 
     assert n_fail <= 1

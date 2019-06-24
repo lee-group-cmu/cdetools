@@ -41,9 +41,9 @@ def hpd_coverage(cdes, z_grid, z_test):
     z_delta = np.prod(z_max - z_min) / n_grid_points
     kdtree = KDTree(z_grid)
 
-    pvals = np.zeros((n_samples, ))
+    vals = np.zeros((n_samples, ))
     for ii in range(n_samples):
         nn_id = kdtree.query(z_test[ii, :])[1]
-        pvals[ii] = z_delta * np.sum(cdes[ii, np.where(cdes[ii, :] > cdes[ii, nn_id])])
+        vals[ii] = z_delta * np.sum(cdes[ii, np.where(cdes[ii, :] > cdes[ii, nn_id])])
 
-    return pvals
+    return vals
