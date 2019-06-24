@@ -4,7 +4,8 @@
 \alias{hpd_contour_levels}
 \title{Calculate contour levels for HPD sets}
 \usage{
-hpd_contour_levels(density, z_grid, probs, max_iters = 200, tol = 0.001)
+hpd_contour_levels(density, z_grid, probs, max_iters = 200,
+  tol = 0.001)
 }
 \arguments{
 \item{density}{A vector of density evaluations.}

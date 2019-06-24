@@ -6,7 +6,7 @@
 #' @param z_grid A vector/matrix of grid points at which the CDE is
 #'   estimated
 #' @param z_test The true responses associated with the observations
-#' @return A vector of "p-values"
+#' @return A vector of values
 #' @examples
 #'   set.seed(12345)
 #'   n_grid <- 10001
@@ -14,8 +14,8 @@
 #'   z_grid <- seq(-5, 5, length.out = n_grid)
 #'   z_test <- rnorm(n_test)
 #'   cdes <- matrix(dnorm(z_grid), nrow = n_test, ncol = n_grid, byrow = TRUE)
-#'   pvals <- cdf_coverage(cdes, z_grid, z_test)
-#'   ks.test(pvals, "punif")
+#'   vals <- cdf_coverage(cdes, z_grid, z_test)
+#'   ks.test(vals, "punif")
 #' @export
 cdf_coverage <- function(cdes, z_grid, z_test) {
   stopifnot(nrow(cdes) == length(z_test))
@@ -25,10 +25,10 @@ cdf_coverage <- function(cdes, z_grid, z_test) {
   z_delta <- (z_max - z_min) / length(z_grid)
 
   n_test <- nrow(cdes)
-  pvals <- rep(NA, n_test)
+  vals <- rep(NA, n_test)
   for (ii in seq_len(n_test)) {
-    pvals[ii] <- z_delta * sum(cdes[ii, z_grid > z_test[ii]])
+    vals[ii] <- z_delta * sum(cdes[ii, z_grid > z_test[ii]])
   }
 
-  return(pvals)
+  return(vals)
 }

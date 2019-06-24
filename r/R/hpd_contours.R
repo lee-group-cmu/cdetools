@@ -23,7 +23,6 @@ hpd_contour_levels <- function(density, z_grid, probs,
     for (iter in seq_len(max_iters)) {
       mid <- (upper + lower) / 2
       area <- sum(density[density >= mid]) * z_delta / n_grid
-      print(area)
 
       if (abs(area - prob) < tol) {
         return(mid)

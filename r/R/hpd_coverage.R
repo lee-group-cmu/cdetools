@@ -6,7 +6,7 @@
 #' @param z_grid A matrix of grid points at which the CDE is
 #'   estimated
 #' @param z_test The true responses associated with the observations
-#' @return A vector of "p-values"; under the true generating model
+#' @return A vector of values; under the true generating model
 #'   these are Uniform(0, 1)
 #' @examples
 #'   set.seed(12345)
@@ -15,8 +15,8 @@
 #'   z_grid <- seq(-5, 5, length.out = n_grid)
 #'   z_test <- rnorm(n_test)
 #'   cdes <- matrix(dnorm(z_grid), nrow = n_test, ncol = n_grid, byrow = TRUE)
-#'   pvals <- hpd_coverage(cdes, z_grid, z_test)
-#'   ks.test(pvals, "punif")
+#'   vals <- hpd_coverage(cdes, z_grid, z_test)
+#'   ks.test(vals, "punif")
 #' @export
 hpd_coverage <- function(cdes, z_grid, z_test) {
   if (!is.matrix(z_grid)) {
@@ -36,12 +36,12 @@ hpd_coverage <- function(cdes, z_grid, z_test) {
   z_delta <- prod(z_max - z_min) / nrow(z_grid)
 
   n_test <- nrow(cdes)
-  pvals <- rep(NA, n_test)
+  vals <- rep(NA, n_test)
   for (ii in seq_len(n_test)) {
     nn_id <- FNN::knnx.index(z_grid, z_test[ii,, drop = FALSE], k = 1)
     cutoff <- cdes[ii, nn_id]
-    pvals[ii] <- z_delta * sum(cdes[ii, cdes[ii, ] >= cutoff])
+    vals[ii] <- z_delta * sum(cdes[ii, cdes[ii, ] >= cutoff])
   }
 
-  return(pvals)
+  return(vals)
 }

@@ -12,7 +12,7 @@ def hpd_coverage(cdes, z_grid, z_test):
     @param z_grid: a numpy array of the grid points at which cde_estimates is evaluated
     @param z_test: a numpy array of the true z values corresponding to the rows of cde_estimates
 
-    @returns A numpy array of "p-values"; under the true generating model
+    @returns A numpy array of values; under the true generating model
        these are Uniform(0, 1)
     """
 
@@ -41,9 +41,9 @@ def hpd_coverage(cdes, z_grid, z_test):
     z_delta = np.prod(z_max - z_min) / n_grid_points
     kdtree = KDTree(z_grid)
 
-    pvals = np.zeros((n_samples, ))
+    vals = np.zeros((n_samples, ))
     for ii in range(n_samples):
         nn_id = kdtree.query(z_test[ii, :])[1]
-        pvals[ii] = z_delta * np.sum(cdes[ii, np.where(cdes[ii, :] > cdes[ii, nn_id])])
+        vals[ii] = z_delta * np.sum(cdes[ii, np.where(cdes[ii, :] > cdes[ii, nn_id])])
 
-    return pvals
+    return vals

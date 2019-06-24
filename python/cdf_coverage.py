@@ -11,7 +11,7 @@ def cdf_coverage(cdes, z_grid, z_test):
     @param z_grid: a numpy array of the grid points at which cde_estimates is evaluated
     @param z_test: a numpy array of the true z values corresponding to the rows of cde_estimates
 
-    @returns A numpy array of p-values
+    @returns A numpy array of values
     """
 
     nrow_cde, ncol_cde = cdes.shape
@@ -28,5 +28,5 @@ def cdf_coverage(cdes, z_grid, z_test):
     z_min = np.min(z_grid)
     z_max = np.max(z_grid)
     z_delta = (z_max - z_min)/n_grid_points
-    pvals = [z_delta * np.sum(cdes[ii, np.where(z_grid > z_test[ii])[0]]) for ii in range(n_samples)]
-    return np.array(pvals)
+    vals = [z_delta * np.sum(cdes[ii, np.where(z_grid > z_test[ii])[0]]) for ii in range(n_samples)]
+    return np.array(vals)
