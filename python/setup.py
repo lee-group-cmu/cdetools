@@ -1,14 +1,10 @@
 from setuptools import setup
 
-with open("README.rst", "r") as f:
-    README_TEXT = f.read()
-
 setup(
       name="cdetools",
       version="0.0.1",
       license="MIT",
       description="Tools for evaluating conditional density estimates.",
-      long_description=README_TEXT,
       author="Niccolo Dalmasso, Taylor Pospisil",
       author_email="niccolo.dalmasso@gmail.com",
       maintainer="niccolo.dalmasso@gmail.com",
