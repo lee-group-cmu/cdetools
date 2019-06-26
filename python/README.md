@@ -1,4 +1,3 @@
-=====
 cdetools: Tools for Conditional Density Estimates
 =====
 
@@ -10,6 +9,6 @@ Installation
 
 cdetools is availabile from PyPI; to install use \`pip\`
 
-.. code:: shell
-
-    pip install cdetools
+```shelll
+pip install cdetools
+```
