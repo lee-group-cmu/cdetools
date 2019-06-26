@@ -1,9 +1,16 @@
-language: r
-cache: packages
-before_install: cd r
-r_binary_packages:
-  - devtools
-  - roxygen2
-
-after_success:
-  - Rscript -e 'devtools::install(); devtools::test()'
+matrix:
+    include:
+     - language: python
+      sudo: false
+      python: '3.6'
+      before_install: cd python
+      install: pip install tox-travis
+      script: tox -v
+     - language: r
+      cache: packages
+      before_install: cd r
+      r_binary_packages:
+       - devtools
+       - roxygen2
+      after_success:
+       - Rscript -e 'devtools::install(); devtools::test()'
