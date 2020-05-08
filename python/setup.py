@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
       name="cdetools",
-      version="0.0.1",
+      version="0.0.2",
       license="MIT",
       description="Tools for evaluating conditional density estimates.",
       author="Niccolo Dalmasso, Taylor Pospisil",
