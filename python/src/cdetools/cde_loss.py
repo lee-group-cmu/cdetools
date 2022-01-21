@@ -37,7 +37,7 @@ def cde_loss(cde_estimates, z_grid, z_test):
 
     z_min = np.min(z_grid, axis=0)
     z_max = np.max(z_grid, axis=0)
-    z_delta = np.prod(z_max - z_min) / n_grid_points
+    z_delta = (z_max - z_min)/(n_grid_points-1)
 
     integrals = z_delta * np.sum(cde_estimates**2, axis=1)
 
