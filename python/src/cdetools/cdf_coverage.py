@@ -27,6 +27,6 @@ def cdf_coverage(cdes, z_grid, z_test):
 
     z_min = np.min(z_grid)
     z_max = np.max(z_grid)
-    z_delta = (z_max - z_min)/n_grid_points
+    z_delta = (z_max - z_min)/(n_grid_points-1)
     vals = [z_delta * np.sum(cdes[ii, np.where(z_grid > z_test[ii])[0]]) for ii in range(n_samples)]
     return np.array(vals)
