@@ -38,7 +38,7 @@ def hpd_coverage(cdes, z_grid, z_test):
 
     z_min = np.min(z_grid, axis=0)
     z_max = np.max(z_grid, axis=0)
-    z_delta = np.prod(z_max - z_min) / n_grid_points
+    z_delta = np.prod(z_max - z_min) / (n_grid_points-1)
     kdtree = KDTree(z_grid)
 
     vals = np.zeros((n_samples, ))
